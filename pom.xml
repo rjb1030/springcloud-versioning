@@ -8,7 +8,7 @@
     <version>1.5.4.RELEASE</version>
   </parent>
 
-  <groupId>com.xinyunlian.springcloud.versioning</groupId>
+  <groupId>com.graydeploy.springcloud.versioning</groupId>
   <artifactId>springcloud-versioning</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
