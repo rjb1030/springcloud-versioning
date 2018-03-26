@@ -14,6 +14,7 @@ public class FeignClientConfigduration {
 
 
     /**
+     * 默认使用RibbonClientConfiguration 配置
      * https://segmentfault.com/a/1190000010486459
      * https://www.jianshu.com/p/19bcd9acf559
      * https://blog.csdn.net/yyz335258/article/details/77863145

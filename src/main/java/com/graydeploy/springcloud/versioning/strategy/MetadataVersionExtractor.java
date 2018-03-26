@@ -15,9 +15,11 @@ public class MetadataVersionExtractor implements RequestVersionExtractor{
 
     @Override
     public String extractVersion(VersioningRequest versioningRequest) {
-        if(serverVersionMetadataProperties!=null && serverVersionMetadataProperties.getMetadata()!=null){
+        if(serverVersionMetadataProperties!=null && serverVersionMetadataProperties.getMetadata()!=null && !serverVersionMetadataProperties.getMetadata().isEmpty()){
             Object version = serverVersionMetadataProperties.getMetadata().get(versioningRequest.getServiceId());
-            return version.toString();
+            if(version!=null){
+                return version.toString();
+            }
         }
         return null;
     }

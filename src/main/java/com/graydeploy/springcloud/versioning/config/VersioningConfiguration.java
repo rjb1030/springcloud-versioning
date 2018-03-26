@@ -67,24 +67,6 @@ public class VersioningConfiguration {
         return new EurekaServerExtractor(springClientFactory);
     }
 
-//    /**
-//     * https://segmentfault.com/a/1190000010486459
-//     * https://www.jianshu.com/p/19bcd9acf559
-//     * https://blog.csdn.net/yyz335258/article/details/77863145
-//     * feign的每个客户端都会按照RibbonClientConfiguration创建一份配置，故IClientConfig IRule ILoadBalancer 等都是不同客户端不同配置的
-//     * 此处做了全局配置后会导致feign共用一个IRule实例，IRule又依赖着ILoadBalancer（客户端对应服务的负载列表），会导致负载列表被覆盖
-//     * @return
-//     */
-//    @Bean
-//    @ConditionalOnMissingBean(value = {VersioningConfiguration.UnUseVersioningIRule.class})
-//    public IRule ribbonRule() {
-////        RoundRobinRule rule = new RoundRobinRule();
-//////        rule.initWithNiwsConfig(config);
-////        return rule;
-//        VersioningZoneAvoidanceRule rule = new VersioningZoneAvoidanceRule();
-//        rule.initWithNiwsConfig(config);
-//        return rule;
-//    }
 
 
     /**
