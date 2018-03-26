@@ -3,6 +3,7 @@ package com.graydeploy.springcloud.versioning.config;
 
 import com.graydeploy.springcloud.versioning.zuul.VersioningZuulConfiguration;
 import com.netflix.client.config.IClientConfig;
+import com.netflix.loadbalancer.ClientConfigEnabledRoundRobinRule;
 import com.netflix.loadbalancer.IRule;
 import com.graydeploy.springcloud.versioning.context.EurekaServerExtractor;
 import com.graydeploy.springcloud.versioning.context.VersioningInitializingBean;
@@ -16,6 +17,7 @@ import com.graydeploy.springcloud.versioning.strategy.MetadataVersionExtractor;
 import com.graydeploy.springcloud.versioning.strategy.RequestVersionExtractor;
 import com.graydeploy.springcloud.versioning.strategy.ServerVersionMetadataProperties;
 import com.graydeploy.springcloud.versioning.utils.VersioningConstants;
+import com.netflix.loadbalancer.RoundRobinRule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -38,14 +40,13 @@ import java.util.List;
 @Import(XylWebMvcConfiguration.class)
 public class VersioningConfiguration {
 
+    @Autowired(required = false)
+    private IClientConfig config;
 
     public static class UnUseVersioningIRule{
 
     }
 
-
-    @Autowired(required = false)
-    private IClientConfig config;
 
     @Autowired
     private SpringClientFactory springClientFactory;
@@ -66,14 +67,24 @@ public class VersioningConfiguration {
         return new EurekaServerExtractor(springClientFactory);
     }
 
-
-    @Bean
-    @ConditionalOnMissingBean(value = {VersioningConfiguration.UnUseVersioningIRule.class})
-    public IRule ribbonRule() {
-        VersioningZoneAvoidanceRule rule = new VersioningZoneAvoidanceRule();
-        rule.initWithNiwsConfig(config);
-        return rule;
-    }
+//    /**
+//     * https://segmentfault.com/a/1190000010486459
+//     * https://www.jianshu.com/p/19bcd9acf559
+//     * https://blog.csdn.net/yyz335258/article/details/77863145
+//     * feign的每个客户端都会按照RibbonClientConfiguration创建一份配置，故IClientConfig IRule ILoadBalancer 等都是不同客户端不同配置的
+//     * 此处做了全局配置后会导致feign共用一个IRule实例，IRule又依赖着ILoadBalancer（客户端对应服务的负载列表），会导致负载列表被覆盖
+//     * @return
+//     */
+//    @Bean
+//    @ConditionalOnMissingBean(value = {VersioningConfiguration.UnUseVersioningIRule.class})
+//    public IRule ribbonRule() {
+////        RoundRobinRule rule = new RoundRobinRule();
+//////        rule.initWithNiwsConfig(config);
+////        return rule;
+//        VersioningZoneAvoidanceRule rule = new VersioningZoneAvoidanceRule();
+//        rule.initWithNiwsConfig(config);
+//        return rule;
+//    }
 
 
     /**

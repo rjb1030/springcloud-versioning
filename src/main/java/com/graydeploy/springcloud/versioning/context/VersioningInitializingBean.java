@@ -1,6 +1,7 @@
 package com.graydeploy.springcloud.versioning.context;
 
 import com.graydeploy.springcloud.versioning.ribbon.VersionRibbonConnectionPoint;
+import com.netflix.loadbalancer.IRule;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
