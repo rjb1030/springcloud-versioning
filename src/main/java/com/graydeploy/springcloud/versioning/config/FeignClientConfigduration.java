@@ -25,6 +25,8 @@ public class FeignClientConfigduration {
      *      @RibbonClient(name = "rujianbin-graydeploy-provider",configuration = FeignClientConfigduration.class),
      *      @RibbonClient(name = "rujianbin-graydeploy-provider2",configuration = FeignClientConfigduration.class)
      *      })
+     *      或者使用配置指定
+     *      service-B.ribbon.NFLoadBalancerRuleClassName=com.netflix.loadbalancer.RandomRule
      * @return
      */
     @Bean

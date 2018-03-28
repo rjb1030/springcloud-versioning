@@ -8,7 +8,7 @@ public interface RequestVersionExtractor {
 
 
     class Default implements RequestVersionExtractor{
-        private static final String VERSION = "version";
+        private static final String VERSION = "rq_version";
 
         @Override
         public String extractVersion(VersioningRequest versioningRequest) {
@@ -18,7 +18,7 @@ public interface RequestVersionExtractor {
 
     class RequestHeaderVersionExtractor implements RequestVersionExtractor{
 
-        public static final String VERSION = "gray_version";
+        public static final String VERSION = "rq_version";
 
         @Override
         public String extractVersion(VersioningRequest versioningRequest) {

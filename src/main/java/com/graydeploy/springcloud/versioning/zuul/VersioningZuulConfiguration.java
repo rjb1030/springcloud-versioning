@@ -1,11 +1,13 @@
 package com.graydeploy.springcloud.versioning.zuul;
 
-import com.netflix.zuul.http.ZuulServlet;
+
 import com.graydeploy.springcloud.versioning.zuul.filter.VersioningPostZuulFilter;
 import com.graydeploy.springcloud.versioning.zuul.filter.VersioningPreZuulFilter;
+import com.netflix.zuul.http.ZuulServlet;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
 
 @Configuration
 @ConditionalOnClass(value = ZuulServlet.class)
